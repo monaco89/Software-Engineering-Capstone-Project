@@ -14,7 +14,7 @@
         <h2>Shit Music Recommendations</h2>
         
         <div id = 'signin_box'>
-            <form class="form-signup" role="form" action="addFavs/addFavs.php" method="POST">
+            <form class="form-signup" role="form" action="addFavs/index.php" method="POST">
             <input type="text" class="form-control" name="first_name" value="" placeholder="First Name" autofocus><br>
             <input type="text" class="form-control" name="last_name" value=""  placeholder="Last Name"><br>
             <input type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
