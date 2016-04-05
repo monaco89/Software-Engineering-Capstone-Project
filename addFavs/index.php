@@ -1,6 +1,6 @@
 <?php 
 require('../db.php'); 
-/*
+
 $email = ($_POST['email']);
 //$uid = 1;
 $first_name = ($_POST['first_name']);
@@ -13,7 +13,7 @@ $SQL = "INSERT INTO user (first_name, last_name, email, password)
     VALUES ('$first_name','$last_name','$email','$password')";
 $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
 //$rowResults = $result->fetch_array(MYSQLI_ASSOC);
-*/
+
 
 $array = ['3TVXtAsR1Inumwj472S9r4','60d24wfXkVzDSfLS6hyCjZ', '6PXS4YHDkKvl1wkIl4V8DL', '6FBDaR13swtiWwGhX1WQsP', '2YZyLoL8N0Wb9xBt1NhZWg', '6l3HvQ5sa6mXTsMTB19rO5', '0BvkDsjIUla7X0k6CSWh1I', '69GGBxA162lTqCwzJG5jLp', '1uNFoZAHBGtllmzznpCI3s', '3gd8FJtBJtkRxdfbTu19U2', '02kJSzxNuaWGqwubyUba0Z', '5K4W6rqBFWDnAN6FQUkS6x', '20sxb77xiYeusSH8cVdatc', '6BrvowZBreEkXzJQMpL174', '6yJCxee7QumYr820xdIsjo', '7CajNmpbOovFoOoasH2HaY', '5pKCCKE2ajJHZ9KAiaK11H', '7iZtZyCzp3LItcw1wtPI3D', '1RyvyyTE3xzB2ZywiAwp0i', '5IcR3N7QB1j6KBL8eImZ8m', '0c173mlxpT3dSFRgMO8XPh', '0hCNtLu0JehylgoiP8L4Gh', '55Aa2cqylxrFIXC767Z865', '2IvkS5MXK0vPGnwyJsrEyV', '3b8QkneNDz4JHKKKlLgYZg', '53XhwfbYqKCa1cC15pYq2q', '3GBPw9NK25X1Wt2OUvOwY3', '16oZKvXb6WkQlVAjwo2Wbg', '4D75GcNG95ebPtNvoNVXhz', '1vCWHaC5f2uS3yhpwWbIA6', '1Cs0zKBU1kc0i8ypK3B9ai', '2o5jDhtHVPhrJdv3cEQ99Z'];
 
