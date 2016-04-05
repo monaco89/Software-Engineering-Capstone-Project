@@ -28,7 +28,7 @@
             <form class="form-signin" name = 'Form' role="form" action="home/" method="post">
                 <input id = 'login_email' type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
                 <input id = 'login_password' type="password" class="form-control" name="password" value=""  placeholder="Password">
-                <input id = 'uid' type="hidden" class="form-control" name="password" value=""><br>
+               <!-- <input id = 'uid' type="hidden" class="form-control" name="uid" value="">--><br>
                 <button id = 'submit' type = 'submit'>Sign in</button>
             </form>
         </div>
