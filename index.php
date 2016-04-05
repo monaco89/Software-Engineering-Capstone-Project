@@ -9,12 +9,14 @@
     </head>
     
     <body>
+        <div id = 'title_box'>
         <h1><img src = 'images/logo.png'></h1>
         <!--<h1>NAME OF WEBSITE</h1>-->
-        <h2>Shit Music Recommendations</h2>
+        <h2>SweetTones4U</h2>
+        </div>
         
         <div id = 'signin_box'>
-            <form class="form-signup" role="form" action="addFavs/index.php" method="POST">
+            <form class="form-signup" role="form" action="addFavs/" method="POST">
             <input type="text" class="form-control" name="first_name" value="" placeholder="First Name" autofocus><br>
             <input type="text" class="form-control" name="last_name" value=""  placeholder="Last Name"><br>
             <input type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
@@ -23,7 +25,7 @@
             </form>
             <a id = 'login' href ="">Sign in</a>
             
-            <form class="form-signin" name = 'Form' role="form" action="home/index.php" method="post">
+            <form class="form-signin" name = 'Form' role="form" action="home/" method="post">
                 <input id = 'login_email' type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
                 <input id = 'login_password' type="password" class="form-control" name="password" value=""  placeholder="Password">
                 <input id = 'uid' type="hidden" class="form-control" name="password" value=""><br>

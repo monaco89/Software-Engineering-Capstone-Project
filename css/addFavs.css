@@ -1,9 +1,11 @@
 body
 {
-    width: 1280px;
+    width: 1260px;
     margin: 0px;
     padding: 0px;
     font-family: Arial;
+    background-image: url(../images/background.jpg);
+    background-size: 100% 105%;
 }
 
 #signin_box
@@ -14,10 +16,32 @@ body
     width: 800px;
     background-color: #4789F0;
     color: black;
-    box-shadow: 0px 5px 5px #B7B7B7;
-    margin-top: 50px;
+    /*box-shadow: 0px 5px 5px #B7B7B7;*/
+    box-shadow: 0px 5px 5px black;
+    margin-top: 40px;
     text-align: center;
     padding: 10px;
+    overflow: scroll;
+    padding-top: 20px;
+}
+
+#deck
+{
+    
+}
+
+#title_box
+{
+    height: 150px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    padding: 10px;
+    margin-top: 0px;
+
+    
+    background-color:rgba(0, 0, 0, 0.8);
 }
 
 img
@@ -29,18 +53,35 @@ img
 
 .artist_img
 {
-    width: 140px;
-    height: 120px; 
+    width: 100%;
+    height: 100%; 
 }
 
-#box
+.box
 {
-    border: 1px solid black;
-    width: 140px;
+    box-shadow: 0px 3px 3px black;
+    width: 160px;
     height: 140px;
     background-color: black;
     color: white;
     cursor: pointer;
+    float: left;
+    margin-right: 17px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.artist_title
+{
+    margin-top: -34px;
+    overflow: hidden;
+    padding-top: 5px;
+    background-color: black;
+    filter:alpha(opacity=60);
+    -moz-opacity:0.6;
+    -khtml-opacity: 0.6;
+    opacity: 0.6; 
+    height:25px;
 }
 
 h1
@@ -48,21 +89,37 @@ h1
     font-family: Arial;
     text-align: center;
     color: #555555;
-    margin-top: 50px;
 }
 
 h2
 {
     font-family: Arial;
     text-align: center;
-    color: #555555;
+    color: white;
     font-weight: 100;
 }
-
+/*
 h3
 {
     font-family: Arial;
     text-align: center;
     color: white;
     font-weight: 100;
+    position: fixed;
+}
+*/
+
+#continue
+{
+    float: right;
+    margin-top: -250px;
+    width: 200px;
+    height: 40px;
+    box-shadow: 0px 3px 3px black;
+    cursor: pointer;
+    background-color: #5088ED;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 16pt;
 }
