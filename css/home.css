@@ -2,6 +2,7 @@ body
 {
     padding-top: 70px;
     font-family: Arial;
+    background-color: #E9EAED;
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -20,13 +21,14 @@ body
 .col-sm-8{
     overflow-y: auto;
     padding-left: 250px;
+    width: 950px;
 }
 /* Set gray background color and 100% height */
 .sidenav {
     padding-top: 50px;
     
-    background-color: #167723;
-   /* background-color: #5088ED;*/
+    /*background-color: #167723;*/
+    background-color: #5088ED;
     height: 100%;
 }
 
@@ -49,6 +51,62 @@ footer {
 
 #search_bar
 {
-    width: 510px;
+    width: 420px;
     margin-left: 40px;
+}
+
+h1
+{
+    background-color: white;
+    box-shadow: 2px 2px 2px #B7B7B7; 
+    height: 60px;
+    padding: 10px;
+}
+
+.recommendation
+{
+    height: 200px;
+    width:100%;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 2px 2px 2px #B7B7B7;
+    padding: 10px;
+}
+
+.artist_img
+{
+    float: left;
+    width: 170px;
+    height: 150px;
+}
+
+.artist_title
+{
+    margin-top: 5px;
+    font-size: 16pt;
+    color: #222222;
+    text-align: center;
+    font-weight: bold;
+}
+
+.s_img
+{
+  float: right;
+    height: 70px;
+    width: 70px;
+    cursor: pointer;
+}
+
+.link
+{
+    float: right;
+    margin-top: 80px;
+    margin-right: -70px;
+    font-size: 10pt;
+}
+
+iframe
+{
+    float: right;
+    margin-right: 40px;
 }
