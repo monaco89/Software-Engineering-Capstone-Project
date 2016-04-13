@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('../db.php'); 
 
 $email = ($_POST['email']);
@@ -14,5 +15,6 @@ else
     $rowResults = $result->fetch_array(MYSQLI_ASSOC);
     $uid = $rowResults['uid'];
     echo($uid);
+    $_SESSION["uid"] = $uid;
 }
 ?>

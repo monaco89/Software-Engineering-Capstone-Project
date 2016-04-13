@@ -4,9 +4,9 @@ session_start();
 require('../db.php');
 
 // get user information
-if(isset($_POST['uid']))
+if(isset( $_SESSION["uid"]))
 {
-    $_SESSION["uid"] = ($_POST['uid']);
+    //$_SESSION["uid"] = ($_POST['uid']);
     $uid = $_SESSION['uid'];
     $SQL = "SELECT * FROM user WHERE uid = '$uid'";
     $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
@@ -78,7 +78,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
-
+        <!-- NAV BAR -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -103,11 +103,11 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                         </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+                        <li><a href="../signout/"><span id = 'signout' class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> <!-- NAV BAR END -->
 
         <div class="container-fluid text-center">    
             <div class="row content">
@@ -133,8 +133,13 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     <h1>Recommendation Feed</h1>
                     <hr>
                     <?php
+                    /*
+                    * For every fav create 2 divs with recommended artists
+                    */
+                    
                     foreach($recommended_artists as $key)
                     {
+                    // api call to spotify //
                     $request = 'https://api.spotify.com/v1/artists/'.$key.'';
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $request);
@@ -192,4 +197,14 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
         </footer>
 
     </body>
+    
+    <script type="text/javascript">
+        $(document).on("click","#signout",function(event){
+            event.preventDefault();
+            $(".form-signup").slideUp();
+            $("#login").slideUp();
+            $(".form-signin").slideDown(); 
+            $("#submit").show("slow");
+        });
+    </script>
 </html>

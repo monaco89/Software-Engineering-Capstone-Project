@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('../db.php'); 
 
 if(($_POST['uid']) != '-1')
@@ -25,6 +26,7 @@ else
     $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
     $rowResults = $result->fetch_array(MYSQLI_ASSOC);
     $uid = $rowResults['uid'];
+    $_SESSION["uid"] = $uid;
 
 
     /*
