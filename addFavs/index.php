@@ -1,35 +1,42 @@
 <?php 
 require('../db.php'); 
 
-$email = ($_POST['email']);
-$first_name = ($_POST['first_name']);
-$last_name = ($_POST['last_name']);
-$email = ($_POST['email']);
-$password = ($_POST['password']);
+if(($_POST['uid']) != '-1')
+{
+    // user must be logged in
+    header("Location: ../");
+}
+else
+{
+    $email = ($_POST['email']);
+    $first_name = ($_POST['first_name']);
+    $last_name = ($_POST['last_name']);
+    $email = ($_POST['email']);
+    $password = ($_POST['password']);
 
 
-$SQL = "INSERT INTO user (first_name, last_name, email, password)
+    $SQL = "INSERT INTO user (first_name, last_name, email, password)
     VALUES ('$first_name','$last_name','$email','$password')";
-$result = $server->query($SQL) or die ('Error executing: ' . $server->error);
-//$rowResults = $result->fetch_array(MYSQLI_ASSOC);
+    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+    //$rowResults = $result->fetch_array(MYSQLI_ASSOC);
 
 
-$SQL = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
-$result = $server->query($SQL) or die ('Error executing: ' . $server->error);
-$rowResults = $result->fetch_array(MYSQLI_ASSOC);
-$uid = $rowResults['uid'];
+    $SQL = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
+    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+    $rowResults = $result->fetch_array(MYSQLI_ASSOC);
+    $uid = $rowResults['uid'];
 
 
-/*
+    /*
 $array = ['3TVXtAsR1Inumwj472S9r4','60d24wfXkVzDSfLS6hyCjZ', '6PXS4YHDkKvl1wkIl4V8DL', '6FBDaR13swtiWwGhX1WQsP', '2YZyLoL8N0Wb9xBt1NhZWg', '6l3HvQ5sa6mXTsMTB19rO5', '0BvkDsjIUla7X0k6CSWh1I', '69GGBxA162lTqCwzJG5jLp', '1uNFoZAHBGtllmzznpCI3s', '3gd8FJtBJtkRxdfbTu19U2', '02kJSzxNuaWGqwubyUba0Z', '5K4W6rqBFWDnAN6FQUkS6x', '20sxb77xiYeusSH8cVdatc', '6BrvowZBreEkXzJQMpL174', '6yJCxee7QumYr820xdIsjo', '7CajNmpbOovFoOoasH2HaY', '5pKCCKE2ajJHZ9KAiaK11H', '7iZtZyCzp3LItcw1wtPI3D', '1RyvyyTE3xzB2ZywiAwp0i', '5IcR3N7QB1j6KBL8eImZ8m', '0c173mlxpT3dSFRgMO8XPh', '0hCNtLu0JehylgoiP8L4Gh', '55Aa2cqylxrFIXC767Z865', '2IvkS5MXK0vPGnwyJsrEyV', '3b8QkneNDz4JHKKKlLgYZg', '53XhwfbYqKCa1cC15pYq2q', '3GBPw9NK25X1Wt2OUvOwY3', '16oZKvXb6WkQlVAjwo2Wbg', '4D75GcNG95ebPtNvoNVXhz', '1vCWHaC5f2uS3yhpwWbIA6', '1Cs0zKBU1kc0i8ypK3B9ai', '2o5jDhtHVPhrJdv3cEQ99Z'];
 */
 
-/* 
+    /* 
 * For Testing Purposes
 */
-$array = ['3TVXtAsR1Inumwj472S9r4', '60d24wfXkVzDSfLS6hyCjZ'];
-
-
+    $array = ['3TVXtAsR1Inumwj472S9r4', '60d24wfXkVzDSfLS6hyCjZ', '6PXS4YHDkKvl1wkIl4V8DL', '6FBDaR13swtiWwGhX1WQsP', '2YZyLoL8N0Wb9xBt1NhZWg', '6l3HvQ5sa6mXTsMTB19rO5', '0BvkDsjIUla7X0k6CSWh1I', '69GGBxA162lTqCwzJG5jLp', '1uNFoZAHBGtllmzznpCI3s', '3gd8FJtBJtkRxdfbTu19U2', '02kJSzxNuaWGqwubyUba0Z', '5K4W6rqBFWDnAN6FQUkS6x'];
+    /************************/ 
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,7 +59,7 @@ $array = ['3TVXtAsR1Inumwj472S9r4', '60d24wfXkVzDSfLS6hyCjZ'];
         </div>
         
         <div id = 'signin_box'>
-            <form class="form-addFavs" id = 'form' name = 'Form' role="form" action="../home/" method="POST">
+            <form class="form-addFavs" id = 'form' role="form" action="../home/" method="POST">
             <div id = 'add_favs'>
                 <div id = 'deck'>
                   
@@ -89,7 +96,7 @@ $array = ['3TVXtAsR1Inumwj472S9r4', '60d24wfXkVzDSfLS6hyCjZ'];
                 </div>
             </div>
         </div>
-        <input type="hidden" id = 'uid' value = '<?php echo($uid);?>'>
+            <input id = 'uid' type="hidden" class="form-control" name="uid" value = '<?php echo($uid);?>'>
         
         </form>
         <button id = 'continue'>Continue</button>
@@ -115,6 +122,7 @@ $array = ['3TVXtAsR1Inumwj472S9r4', '60d24wfXkVzDSfLS6hyCjZ'];
                 url: '../functions/addFavs.php',
                 data: { 'uid' : uid, 'likes_array' : like_array},
                 success: function(result){
+                    alert($('#uid').val());
                     $('#form').submit();
                 }
             });  

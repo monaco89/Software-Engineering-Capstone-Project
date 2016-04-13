@@ -16,21 +16,24 @@
         </div>
         
         <div id = 'signin_box'>
+            <form class="form-signin" role="form" action="home/" method="POST">
+                <input id = 'login_email' type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
+                <input id = 'login_password' type="password" class="form-control" name="password" value=""  placeholder="Password">
+                <input id = 'uid' type="hidden" class="form-control" name="uid" value=""><br>
+                
+            </form>
+            <button id = 'submit'>Sign in</button>
+            
             <form class="form-signup" role="form" action="addFavs/" method="POST">
             <input type="text" class="form-control" name="first_name" value="" placeholder="First Name" autofocus><br>
             <input type="text" class="form-control" name="last_name" value=""  placeholder="Last Name"><br>
             <input type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
             <input type="password" class="form-control" name="password" value=""  placeholder="Password"><br>
+                <input id = 'uid' type="hidden" class="form-control" name="uid" value="-1">
                 <button id = 'register' type = 'submit'>Register</button>
             </form>
             <a id = 'login' href ="">Sign in</a>
             
-            <form class="form-signin" name = 'Form' role="form" action="home/" method="post">
-                <input id = 'login_email' type="email" class="form-control" name="email" value=""  placeholder="Email Address"><br/>
-                <input id = 'login_password' type="password" class="form-control" name="password" value=""  placeholder="Password">
-               <!-- <input id = 'uid' type="hidden" class="form-control" name="uid" value="">--><br>
-                <button id = 'submit' type = 'submit'>Sign in</button>
-            </form>
         </div>
     </body>
     
@@ -39,28 +42,59 @@
             event.preventDefault();
             $(".form-signup").slideUp();
             $("#login").slideUp();
-            $(".form-signin").slideDown();  
+            $(".form-signin").slideDown(); 
+            $("#submit").show("slow");
         });
         
-        $('form-signin').submit(function(){
+        
+        $(document).on("click","#submit",function(event){
+            //event.preventDefault();
             var email = $("#login_email").val();
             var password = $("#login_password").val();
-
             $.ajax({
                 type: "POST",
                 url: 'functions/login.php',
                 data: {'email' : email, 'password' : password},
                 success: function(result){
                     console.log(result);
-                    if(result == 'success')
+                    if(result == '')
+                    {
+                        alert('wrong email or password');
+                        $("#uid").val(result);
+                    }
+                    else
+                    {
+                        $("#uid").val(result);
+                        console.log($("#uid").val());
+                        $('Form').eq(0).submit();
+                    }
+                }
+            });   
+        });
+        
+        /*
+        $('form-signin').submit(function(){
+            console.log("test");
+            var email = $("#login_email").val();
+            var password = $("#login_password").val();
+            $.ajax({
+                type: "POST",
+                url: 'functions/login.php',
+                data: {'email' : email, 'password' : password},
+                success: function(result){
+                    console.log(result);
+                    if(result == 'failed')
                         {
-                            $("#uid").val() = 1;
-                            return true;
+                            alert('wrong email or password');
+                            $("#uid").val(result);
                         }
                     else
-                        alert('wrong email or password');
+                        {
+                            $("#uid").val(result);
+                            return true; 
+                        }
                 }
             });  
-        });
+        });*/
     </script>
 </html>

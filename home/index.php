@@ -1,15 +1,26 @@
 <?php
-require('../db.php'); 
+// Start the session
+session_start();
+require('../db.php');
 
+// get user information
 if(isset($_POST['uid']))
 {
-    $uid = ($_POST['uid']);
+    $_SESSION["uid"] = ($_POST['uid']);
+    $uid = $_SESSION['uid'];
     $SQL = "SELECT * FROM user WHERE uid = '$uid'";
     $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
     $rowResults = $result->fetch_array(MYSQLI_ASSOC);
     $first = $rowResults['first_name'];
     $last = $rowResults['last_name'];
 }
+else{
+    // user must be logged in
+    header("Location: ../");
+}
+
+/*
+* WAS FOR AFTER ADD FAVS
 else
 {
     $email = ($_POST['email']);
@@ -20,7 +31,7 @@ else
     $first = $rowResults['first_name'];  
     $last = $rowResults['last_name'];
     $uid = $rowResults['uid'];
-}
+}*/
 
 $SQL = "SELECT * FROM likes WHERE uid = '$uid'";
 $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
@@ -45,8 +56,9 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
     array_push($recommended_artists, $related_id);
     $related_id = $results['artists'][2]['id'];
     array_push($recommended_artists, $related_id);
+    /*
     $related_id = $results['artists'][3]['id'];
-    array_push($recommended_artists, $related_id);
+    array_push($recommended_artists, $related_id);*/
    // echo($related_id);
 }
 

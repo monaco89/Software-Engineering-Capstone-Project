@@ -8,6 +8,11 @@ body
     background-size: 100% 115%;
 }
 
+#submit
+{
+    display:none;
+}
+
 #signin_box
 {
     margin-left: auto;
