@@ -1,12 +1,25 @@
-<?php require('../db.php'); 
+<?php 
 session_start();
-// user must be logged in
-if (!isset($_SESSION['uid'])) {
-    header("Location: ../");
-}
+require('../db.php'); 
 // get user information
-else {
-    echo("sucessdfdfdsfhdjkhfkdlhfdhfkljdsfhslafhjhkdshkfllllllllllllllllllllllllllllllllllllllllllllll");
+if(isset( $_SESSION["uid"]))
+{
+    //$_SESSION["uid"] = ($_POST['uid']);
+    $uid = $_SESSION['uid'];
+    $SQL = "SELECT * FROM user WHERE uid = '$uid'";
+    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+    $rowResults = $result->fetch_array(MYSQLI_ASSOC);
+    $first = $rowResults['first_name'];
+    $last = $rowResults['last_name'];
+    
+    $SQL = "SELECT * FROM user_bio WHERE uid = '$uid'";
+    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+    $rowResults = $result->fetch_array(MYSQLI_ASSOC);
+    $bio = $rowResults['bio'];
+}
+else{
+    // user must be logged in
+    header("Location: ../");
 }
 
 ?>
@@ -16,7 +29,7 @@ else {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>User Profile</title>
+        <title>Profile</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
         <link href="../css/font-awesome.css" rel="stylesheet" />
@@ -37,11 +50,10 @@ else {
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                        <li><a href="../home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo(" ".$first." ".$last);?></a></li>
+                       <!-- <li><a href="#"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Find Artists">
@@ -59,19 +71,19 @@ else {
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2>User Profile</h2>
+                    <h2>Profile</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-3">
 
                     <div class="user-wrapper">
-                        <img src=" " class="img-responsive" alt="image goes here"/> 
+                        <img src="../images/profile.jpg" class="img-responsive" alt="image goes here"/> 
                         <div class="description">
-                            <h4> User's Name goes here</h4>
+                            <h4><?php echo($first." ".$last);?></h4>
                             <h5> <strong> Student </strong></h5>
                             <hr />
-                            <a href="#" class="btn btn-danger btn-sm"> <i class="fa fa-user-plus" ></i> &nbsp;Follow Me </a> 
+                          <!--  <a href="#" class="btn btn-danger btn-sm"> <i class="fa fa-user-plus" ></i> &nbsp;Follow Me </a> -->
                         </div>
                     </div>
                 </div>
@@ -81,11 +93,8 @@ else {
                         <h3> User's Biography : </h3>
                         <hr />
                         <p>
-                            asldjflaksjd;foiajsd;oigja;sidhg;o asidlgka;ofdig;asld.uadg.a;osdglaidgoad;liga;digagadgasdlakdgasd
-                        </p>
-                        <p>
-                            laksjdo; iaorigalsdjg 'iajd;go ihd;ogi hadofigj a;lidgoiargh; laig[ae;hrgliadg; adlfgasoidg erg;a 
-                        </p>   
+                            <?php echo($bio);?>
+                        </p>  
                         <h3> Friends and Favorites: </h3>
                         <hr />                
 

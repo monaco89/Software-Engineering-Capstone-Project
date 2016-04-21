@@ -85,8 +85,8 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../home/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a href="../profile/"><span class="glyphicon glyphicon-user"></span> <?php echo($first." "); echo($last);?></a></li>
-                        <li><a href="../profile/#music"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
-                        <li><a href="../profile/#friends"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>
+                       <!-- <li><a href="../profile/#music"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
+                        <li><a href="../profile/#friends"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Find Artists" id = 'search_bar'>
@@ -118,8 +118,20 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
                     while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     {
+                        /*
+                        * Get users first like to display
+                        */
+                        $SQL2 = "SELECT * FROM likes WHERE uid = '".$rowResults['uid']."' LIMIT 1";
+                        $result2 = $server->query($SQL2) or die ('Error executing: ' . $server->error);
+                        while($rowResults2 = $result2->fetch_array(MYSQLI_ASSOC))
+                        {
+                            $artist = $rowResults2['artist'];
+                        }
+                        
                         echo" <div class='well'>";
-                        echo"<p>".$rowResults['first_name']." ".$rowResults['last_name']."</p>";
+                        echo"<p style = 'font-weight:bold;'>".$rowResults['first_name']." ".$rowResults['last_name']."</p>";
+                        echo"<p style = 'font-size:9pt;'>likes</p>";
+                        echo"<p>".$artist."</p>";
                         echo"</div>";
                     }
 
