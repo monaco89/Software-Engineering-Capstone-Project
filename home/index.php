@@ -18,20 +18,11 @@ else{
     // user must be logged in
     header("Location: ../");
 }
-
 /*
-* WAS FOR AFTER ADD FAVS
-else
-{
-    $email = ($_POST['email']);
-    $password = ($_POST['password']);
-    $SQL = "SELECT * FROM user WHERE email = '$email' AND password = '$password'";
-    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
-    $rowResults = $result->fetch_array(MYSQLI_ASSOC);
-    $first = $rowResults['first_name'];  
-    $last = $rowResults['last_name'];
-    $uid = $rowResults['uid'];
-}*/
+* Get all user likes from database 
+* put them in likes array
+* get 3 recommended artitst for each like through spotify api
+*/
 
 $SQL = "SELECT * FROM likes WHERE uid = '$uid'";
 $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
@@ -76,6 +67,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
         <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     </head>
     <body>
         <!-- NAV BAR -->
@@ -108,35 +100,41 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                 </div>
             </div>
         </nav> <!-- NAV BAR END -->
-
+        
+        
+        <!-- user side bar -->
         <div class="container-fluid text-center">    
             <div class="row content">
                 <div class="col-sm-2 sidenav">
-                    <h3>Friends</h3>
-                    <div class="well">
-                        <p> user here</p>
-                    </div>
-                    <div class="well">
-                        <p> user here</p>
-                    </div>
-                    <div class="well">
-                        <p> user here</p>
-                    </div>
-                    <div class="well">
-                        <p> user here</p>
-                    </div>
-                    <div class="well">
-                        <p> user here</p>
-                    </div>
+                    <h3>Users</h3>
+
+            
+                    <?php
+                    /*
+                    * Get users from database ot display in feed
+                    */
+                    
+                    $SQL = "SELECT * FROM user WHERE uid != '$uid' LIMIT 10";
+                    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+                    while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
+                    {
+                        echo" <div class='well'>";
+                        echo"<p>".$rowResults['first_name']." ".$rowResults['last_name']."</p>";
+                        echo"</div>";
+                    }
+
+                    ?>
                 </div>
+                
+                <!-- recommendation feed -->
                 <div class="col-sm-8 text-left"> 
                     <h1>Recommendation Feed</h1>
                     <hr>
                     <?php
                     /*
-                    * For every fav create 2 divs with recommended artists
+                    * For every fav create 3 divs with recommended artists
                     */
-                    
+                    shuffle($recommended_artists);
                     foreach($recommended_artists as $key)
                     {
                     // api call to spotify //
@@ -151,6 +149,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     $Name = $json->name;
                     $id = $json->id; 
                     $uri = $json->uri;
+                    $genres = $json->genres;
 
                     $count = 0;
                     foreach($Images[2] as $result) {
@@ -158,7 +157,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     $Image = $result;
                     $count = $count + 1;
                     }
-                        
+                        /* get top track for artist */
                         $request = 'https://api.spotify.com/v1/artists/'.$key.'/top-tracks?country=US';
                         $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $request);
@@ -176,11 +175,24 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     echo"<p class = 'key' style = 'display:none;'>$key</p>";
                     echo"<p value = '$key' class = 'artist_title'>";
                     echo($Name);
-                       
-                    echo"</p>";
-                        echo"<a title = 'View on Spotify' href = '$uri'><img class = 's_img' src = '../images/spotify.png' alt = 'spotify'></a>";
-                    echo"<p class = 'link'>View Artist <br/>on Spotify </p>";
+                        
+                        
+                        // check if already liked artist
+                        if(in_array($key, $likes_array))
+                        {
+                            echo"<span class = '.like' data-id = '$key' data-name = '$Name' data-genre = '$genres[0]'><img class = 'like_icon' src = '../images/liked.png' onclick = 'like(this)'></span>";  
+                        }
+                        else
+                        {
+                            echo"<span class = '.like' data-id = '$key' data-name = '$Name'><img class = 'like_icon' src = '../images/like.png' onclick = 'like(this)'></span>";
+
+                        }
+                        echo"</p>";
+            
                         echo"<iframe src='https://embed.spotify.com/?uri=$uri_track' frameborder='0' allowtransparency='true'></iframe>";
+                        
+                        echo"<a class = 'link' title = 'View on Spotify' href = '$uri'><img class = 's_img' src = '../images/button_s.png' alt = 'spotify'></a>";
+                        
                         echo"</div>";
                     }
                     
@@ -206,5 +218,38 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
             $(".form-signin").slideDown(); 
             $("#submit").show("slow");
         });
+        
+        function like(e)
+        {
+            var uid = <?php echo($uid); ?>;
+            var id = $(e).data('id');
+            var name = $(e).data('name');
+            var genre = $(e).data('genre');
+            if($(e).attr("src") == "../images/like.png")
+                {
+                    $(e).attr("src", "../images/liked.png");
+                    $.ajax({
+                        type: "POST",
+                        url: '../functions/like.php',
+                        data: {'uid' : uid, 'id' : id, 'name' : name, 'genre' : genre},
+                        success: function(result){
+                            console.log(result);
+                        }
+                    });   
+                }
+            else
+                {
+                    $(e).attr("src", "../images/like.png");
+                    $.ajax({
+                        type: "POST",
+                        url: '../functions/unlike.php',
+                        data: {'uid' : uid, 'id' : id},
+                        success: function(result){
+                            console.log(result);
+                          
+                        }
+                    });   
+                }
+        }
     </script>
 </html>

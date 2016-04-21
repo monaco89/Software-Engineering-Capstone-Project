@@ -70,14 +70,14 @@ h1
     background-color: white;
     margin-top: 20px;
     box-shadow: 2px 2px 2px #B7B7B7;
-    padding: 10px;
+    padding: 0px;
 }
 
 .artist_img
 {
     float: left;
-    width: 170px;
-    height: 150px;
+    width: 230px;
+    height: 200px;
 }
 
 .artist_title
@@ -91,22 +91,29 @@ h1
 
 .s_img
 {
-  float: right;
-    height: 70px;
-    width: 70px;
+    height: 32px;
+    width: 128px;
     cursor: pointer;
+    float: right;
+    margin-right: 170px;
+    margin-top: -30px;
 }
 
 .link
 {
-    float: right;
-    margin-top: 80px;
-    margin-right: -70px;
-    font-size: 10pt;
+
 }
 
 iframe
 {
     float: right;
-    margin-right: 40px;
+    margin-right: 80px;
+}
+
+.like_icon
+{
+    height:18px;
+    width:21px;
+    margin-left: 15px;
+    cursor: pointer;
 }
