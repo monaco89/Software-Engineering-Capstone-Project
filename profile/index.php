@@ -16,6 +16,11 @@ if(isset( $_SESSION["uid"]))
     $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
     $rowResults = $result->fetch_array(MYSQLI_ASSOC);
     $bio = $rowResults['bio'];
+
+    $SQL = "SELECT * FROM likes where uid = '$uid'";
+    $result = $server->query($SQL) or die ('Error executing: ' . $server->error);
+    $likes_array = array();
+    
 }
 else{
     // user must be logged in
@@ -91,7 +96,52 @@ else{
                         </p>  
                         <h3> Friends and Favorites: </h3>
                         <hr />                
+			<?php
+			
+			while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
+			{
+			    array_push($likes_array, $rowResults['spotify_id']);
 
+			    $request = 'https://api.spotify.com/v1/artists/'.$rowResults['spotify_id'].'/related-artists';
+			    $ch = curl_init();
+			    curl_setopt($ch, CURLOPT_URL, $request);
+			    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			    $response = curl_exec($ch);
+			    curl_close($ch);
+			    $results = json_decode($response, true);
+
+			 }
+			
+			shuffle($results)
+			foreach($results as $key)
+			{
+			    // api call to spotify //
+			    $request = 'https://api.spotify.com/v1/artists/'.$key.'';
+			    $ch = curl_init();
+			    curl_setopt($ch, CURLOPT_URL, $request);
+			    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			    $response = curl_exec($ch);
+			    curl_close($ch);
+			    $json = json_decode($response);
+			    $Images = $json->images;
+			    $Name = $json->name;
+			    $id = $json->id;
+			    $uri = $json->uri;
+			    $genres = $json->genres;
+
+			    $count = 0;
+			    foreach($Images[2] as $result) {
+			    if($count == 1)
+			    $Image = $result;
+			    $count = $count + 1;
+
+			}
+
+			echo"<img class = 'artist_img' src ='$Image' alt = 'artist'>";
+                    	echo"<p class = 'key' style = 'display:none;'>$key</p>";
+			echo"<p value = '$key' class = 'artist_title'>";
+			echo($Name);
+		    ?>	
                     </div>
 
                 </div>
