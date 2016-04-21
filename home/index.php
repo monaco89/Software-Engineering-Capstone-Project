@@ -81,18 +81,13 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     </button>
                     <a class="navbar-brand" href="#">SweetTones4U</a>
                 </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
+                <div class="colla
+pse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../home/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a href="../profile/"><span class="glyphicon glyphicon-user"></span> <?php echo($first." "); echo($last);?></a></li>
                        <!-- <li><a href="../profile/#music"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
                         <li><a href="../profile/#friends"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Find Artists" id = 'search_bar'>
-                            </div>
-                            <button type="submit" class="btn btn-default">Search</button>
-                        </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../signout/"><span id = 'signout' class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>

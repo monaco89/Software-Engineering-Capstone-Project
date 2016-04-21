@@ -54,12 +54,6 @@ else{
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo(" ".$first." ".$last);?></a></li>
                        <!-- <li><a href="#"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Find Artists">
-                            </div>
-                            <button type="submit" class="btn btn-default">Search</button>
-                        </form>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
