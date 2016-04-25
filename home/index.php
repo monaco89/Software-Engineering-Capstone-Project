@@ -82,12 +82,12 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                     <a class="navbar-brand" href="#">SweetTones4U</a>
                 </div>
                 <div class="colla
-pse navbar-collapse" id="myNavbar">
+                            pse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="../home/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li><a href="../profile/"><span class="glyphicon glyphicon-user"></span> <?php echo($first." "); echo($last);?></a></li>
-                       <!-- <li><a href="../profile/#music"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
-                        <li><a href="../profile/#friends"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
+                        <!-- <li><a href="../profile/#music"><span class="glyphicon glyphicon-headphones"></span> Music</a></li>
+<li><a href="../profile/#friends"><span class="glyphicon glyphicon-globe"></span> Friends</a></li>-->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../signout/"><span id = 'signout' class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
@@ -127,6 +127,7 @@ pse navbar-collapse" id="myNavbar">
                         echo"<p style = 'font-weight:bold;'>".$rowResults['first_name']." ".$rowResults['last_name']."</p>";
                         echo"<p style = 'font-size:9pt;'>likes</p>";
                         echo"<p>".$artist."</p>";
+                        echo"<button onclick = 'follow(this)' data-id = '".$rowResults['uid']."' class='btn btn-danger btn-sm'>Follow Me</button>";
                         echo"</div>";
                     }
 
@@ -257,6 +258,39 @@ pse navbar-collapse" id="myNavbar">
                         }
                     });   
                 }
+        }
+        
+        function follow(e)
+        {
+            var uid = <?php echo($uid); ?>;
+            var id = $(e).data('id');
+            
+            console.log(id);
+            if($(e).text() == "Follow Me")
+            {
+                $(e).text("UnFollow")
+                $.ajax({
+                    type: "POST",
+                    url: '../functions/follow.php',
+                    data: {'uid' : uid, 'id' : id},
+                    success: function(result){
+                        console.log(result);
+                    }
+                });   
+            }
+            else
+            {
+                $(e).text("Follow Me")
+                $.ajax({
+                    type: "POST",
+                    url: '../functions/unfollow.php',
+                    data: {'uid' : uid, 'id' : id},
+                    success: function(result){
+                        console.log(result);
+
+                    }
+                });   
+            }
         }
     </script>
 </html>

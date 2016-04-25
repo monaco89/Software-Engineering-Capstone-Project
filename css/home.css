@@ -17,12 +17,14 @@ body
 .row.content {height: 1000px}
 .col-sm-2{
     position: fixed;
+    z-index:  99;
 }
 .col-sm-8{
     overflow-y: auto;
     padding-left: 250px;
     width: 950px;
 }
+
 /* Set gray background color and 100% height */
 .sidenav {
     padding-top: 50px;
@@ -104,6 +106,11 @@ h1
 
 }
 
+.well
+{
+    line-height: 10px;
+}
+
 iframe
 {
     float: right;
@@ -116,4 +123,13 @@ iframe
     width:21px;
     margin-left: 15px;
     cursor: pointer;
+}
+
+button
+{
+    cursor: pointer;
+    background-color: #D84F4F;
+    left: 0px;
+    top: 0px;
+    z-index:  999;
 }

@@ -89,7 +89,7 @@ else{
 
                 <div class="col-md-9 col-sm-9  user-wrapper">
                     <div class="description">
-                        <h3> User's Biography : </h3>
+                        <h3> Bio : </h3>
                         <hr />
                         <p>
                             <?php echo($bio);?>
@@ -112,8 +112,8 @@ else{
 
 			 }
 			
-			shuffle($results)
-			foreach($results as $key)
+			shuffle($likes_array);
+			foreach($likes_array as $key)
 			{
 			    // api call to spotify //
 			    $request = 'https://api.spotify.com/v1/artists/'.$key.'';
@@ -137,17 +137,18 @@ else{
 
 			}
 
-			echo"<img class = 'artist_img' src ='$Image' alt = 'artist'>";
-                    	echo"<p class = 'key' style = 'display:none;'>$key</p>";
-			echo"<p value = '$key' class = 'artist_title'>";
-			echo($Name);
+                echo"<div class = 'box'>";
+                echo"<img class = 'artist_img' src ='$Image' alt = 'artist'>";
+                echo"<p class = 'key' style = 'display:none;'>$key</p>";
+                echo"<br/><p value = '$key' class = 'artist_title'>";
+                echo($Name);
+                echo"</p></div>";
+            }
 		    ?>	
                     </div>
-
                 </div>
             </div>
         </div>
-
     </body>
 
 </html>
