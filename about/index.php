@@ -56,7 +56,7 @@ else{
         </nav> <!-- NAV BAR END -->
         
         <div class="container">
-            <p>About SweetTones4U...</p>
+            <p>SweetTone4U is a music recommendation site that finds the best fit music for you. It uses state of the art technology to find the best possible recommendation based on the artists, albums, and song you have liked. With this application you can easily share, like, and listen to all your colleagues music as well as your own. </p>
         </div>
         
     </body>
