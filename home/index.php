@@ -188,11 +188,11 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
                         // check if already liked artist
                         if(in_array($key, $likes_array))
                         {
-                            echo"<span class = '.like' data-id = '$key' data-name = '$Name' data-genre = '$genres[0]'><img class = 'like_icon' src = '../images/liked.png' onclick = 'like(this)'></span>";  
+                            echo"<span class = '.like' data-id = '$key' data-name = '$Name' data-genre = 'genre'><img class = 'like_icon' src = '../images/liked.png' onclick = 'like(this)' data-id = '$key' data-name = '$Name' data-genre = 'genre'></span>";  
                         }
                         else
                         {
-                            echo"<span class = '.like' data-id = '$key' data-name = '$Name'><img class = 'like_icon' src = '../images/like.png' onclick = 'like(this)'></span>";
+                            echo"<span class = '.like' data-id = '$key' data-name = '$Name'><img class = 'like_icon' src = '../images/like.png' onclick = 'like(this)' data-id='$key' data-name='$Name' ></span>";
 
                         }
                         echo"</p>";
@@ -213,7 +213,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
         </div>
 
         <footer class="container-fluid text-center">
-            <p>About us</p>
+            <a href="../about/" class = 'about'>About us</a>
         </footer>
 
     </body>
@@ -233,6 +233,7 @@ while($rowResults = $result->fetch_array(MYSQLI_ASSOC))
             var id = $(e).data('id');
             var name = $(e).data('name');
             var genre = $(e).data('genre');
+            console.log(id);
             if($(e).attr("src") == "../images/like.png")
                 {
                     $(e).attr("src", "../images/liked.png");

@@ -124,7 +124,7 @@ $array = ['3TVXtAsR1Inumwj472S9r4','60d24wfXkVzDSfLS6hyCjZ', '6PXS4YHDkKvl1wkIl4
                 url: '../functions/addFavs.php',
                 data: { 'uid' : uid, 'likes_array' : like_array},
                 success: function(result){
-                    alert($('#uid').val());
+                   // alert($('#uid').val());
                     $('#form').submit();
                 }
             });  

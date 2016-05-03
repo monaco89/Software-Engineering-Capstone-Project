@@ -27,11 +27,13 @@ body
 
 /* Set gray background color and 100% height */
 .sidenav {
-    padding-top: 50px;
+    padding-top: 20px;
     
     /*background-color: #167723;*/
     background-color: #5088ED;
     height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 60px;
 }
 
 /* Set black background color, white text and some padding */
@@ -132,4 +134,16 @@ button
     left: 0px;
     top: 0px;
     z-index:  999;
+}
+
+.about
+{
+    cursor: pointer;
+    color: white;
+}
+
+.about:hover
+{
+    text-decoration: underline;
+    color: white;
 }

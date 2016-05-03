@@ -1,0 +1,22 @@
+body
+{
+    padding-top: 70px; 
+    width: 1280px;
+    margin: 0px;
+    font-family: Arial;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    padding-top: 10px;
+    height: 70px;
+}
+
+.container
+{
+    text-align: center;
+    font-size: 14pt;
+    margin-top: 50px;
+}

@@ -8,6 +8,13 @@ body
     font-family: Arial;
 }
 
+/* Set black background color, white text and some padding */
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+}
+
     .user-wrapper .btn {
         border-radius: 0px;
         -webkit-border-radius: 0px;
@@ -71,6 +78,25 @@ body
     margin-bottom: 20px;
 }
 
+.box_user
+{
+    box-shadow: 0px 3px 3px black;
+    width: 160px;
+    height: 140px;
+    background-color: black;
+    color: white;
+    float: left;
+    margin-right: 17px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.box_user:hover
+{
+    box-shadow: 0px 3px 3px #D84F4F; 
+}
+
 .artist_title
 {
     margin-top: -34px;
@@ -82,5 +108,45 @@ body
     -khtml-opacity: 0.6;
     opacity: 0.6; 
     height:25px;
+}
+
+#description
+{
+    padding-top:300px;
+}  
+
+#friends
+{
+    padding-left:20px;
+    padding-top:300px;
+}
+
+#edit
+{
+    cursor: pointer;
+}
+
+#edit:hover
+{
+    text-decoration: underline;
+}
+
+textarea
+{
+    width:600px;
+    height:100px;
+    text-align: left;
+}
+
+.about
+{
+    cursor: pointer;
+    color: white;
+}
+
+.about:hover
+{
+    text-decoration: underline;
+    color: white;
 }
 
